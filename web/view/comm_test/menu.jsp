@@ -13,37 +13,32 @@
     <script>
         $(function () {
             $.ajax({
-                url: "/sys/menu",
-                type: "get",
-                data: "",
-                dataType: "json",
+                url: '/sys/menu',
+                data: '',
+                type: 'get',
+                dataType: 'json',
                 success: function (data) {
                     var html = '';
-                    //外层循环（取出1级菜单数据）
                     for (var i = 0; i < data.length; i++) {
-                        //只选择1级菜单
                         if (data[i].type == 1) {
-                            html = html + data[i].name + "</br>";
+                            html = html + data[i].name;
                             html = html + '<ul>';
-                            //内层循环（取出2级菜单数据）
                             for (var j = 0; j < data.length; j++) {
-                                //2级菜单和1级菜单产生关联
-                                if (data[j].pId == data[i].id) {
-                                    //只选择2级菜单
-                                    if (data[j].type == 2) {
-                                        html = html + '<li><a href="' + data[j].menuUrl + '">' + data[j].name + '</a></li>';
-                                    }
+                                if (data[i].id == data[j].pId) {
+                                        if (data[j].type== 2) {
+                                            html = html+'<li><a href="'+data[j].menuUrl+'">'+data[j].name+'</a></li>';
+                                        }
                                 }
                             }
-                            html = html + '</ul>';
+                            html += '</ul>';
                         }
                     }
                     $("#div-menu").append(html);
                 },
-                error:function () {
-                    console.log("erroro!!!!!ajax")
+                error: function () {
+                    console.log("失败");
                 }
-            });
+            })
         })
     </script>
 </head>

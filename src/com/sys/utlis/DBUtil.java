@@ -1,4 +1,4 @@
-package com.sys;
+package com.sys.utlis;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
