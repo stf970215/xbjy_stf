@@ -18,7 +18,7 @@ public class UserDao {
 
 
     //查询
-    public  List<User> listAll(String account, Page page){
+    public  List<User> listAll(String account, Page page,String ks,String js){
         String sql="SELECT " +
                 "b.NAME deptname," +
                 "a.id id," +
@@ -31,13 +31,13 @@ public class UserDao {
                 "FROM " +
                 "sys_user a " +
                 "LEFT JOIN sys_dept b ON a.dept_id = b.id "+
-                "WHERE a.account LIKE ? limit ?,?";
-        return template.query(sql,new BeanPropertyRowMapper<>(User.class),"%"+account+"%",(page.getPageCurrent()-1)*page.getPageSize(),page.getPageSize());
+                "WHERE a.account LIKE ? and a.create_time between ? and ? limit ?,?";
+        return template.query(sql,new BeanPropertyRowMapper<>(User.class),"%"+account+"%",ks,js,(page.getPageCurrent()-1)*page.getPageSize(),page.getPageSize());
     }
     //查询总记录数
-    public Integer getCount(String account){
-        String sql = "select count(*) from sys_user where account like ?";
-        return  template.queryForObject(sql,Integer.class,"%"+account+"%");
+    public Integer getCount(String account,String ks,String js){
+        String sql = "select count(*) from sys_user where account like ? and create_time between ? and ?";
+        return  template.queryForObject(sql,Integer.class,"%"+account+"%",ks,js);
     }
     //删除
     public void delID(Integer id){
@@ -66,5 +66,10 @@ public class UserDao {
         template.update(sql, user.getPassword(), user.getAccount());
     }
 
+    //登录
+    public List<User> checkLogin(User user){
+        String sql="select * from sys_user where account= ? and password = ?";
+        return template.query(sql,new BeanPropertyRowMapper<>(User.class),user.getAccount(),user.getPassword());
 
+    }
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +34,30 @@ public class UserServlet extends BaseServlet {
 
     //查询方法
     public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        String ks = request.getParameter("ks");
-//        String js = request.getParameter("js");
+        String ks = request.getParameter("ks");
+        String js = request.getParameter("js");
 //
 //        Date date=new Date();
 //        SimpleDateFormat ss=new SimpleDateFormat("yyyy-MM-dd");
 //        String format = ss.format(date);
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (ks == null && js == null) {
+            ks = "1949-10-01";
+            js = sdf.format(new Date());
+
+        } else if (ks == null && js != null) {
+            ks = "1949-10-01";
+            request.setAttribute("js", js);
+        } else if (ks != null && js == null || js == "") {
+            js = sdf.format(new Date());
+            request.setAttribute("ks", ks);
+        } else {
+            request.setAttribute("ks", ks);
+            request.setAttribute("js", js);
+        }
         //查询条件
         String account = request.getParameter("account");
         account=account==null?"":account;
@@ -48,7 +67,7 @@ public class UserServlet extends BaseServlet {
 //        //当前页
         String pagey = request.getParameter("page");
         //查询总数据数
-        Integer count = service.getCount(account);
+        Integer count = service.getCount(account,ks,js);
         
 
         Page page=new Page();
@@ -56,7 +75,7 @@ public class UserServlet extends BaseServlet {
         Integer pageCurrent=pagey==null?1: Integer.valueOf(pagey);
         page.setPageCurrent(pageCurrent);
 
-        List<User> userList = service.listAll(account,page);
+        List<User> userList = service.listAll(account,page,ks,js);
         //查询的数据
         request.setAttribute("list",userList);
         //查询的条件

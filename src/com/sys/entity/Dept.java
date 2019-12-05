@@ -2,11 +2,32 @@ package com.sys.entity;
 
 public class Dept {
 
+
+    private String user;
+
+
+
+    private Integer count;
     private Integer id;
     private String name;
     private String createTime;
     private Integer createBy;
     private Integer delFlag;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;

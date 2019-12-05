@@ -75,7 +75,7 @@
             success: function (data) {
                 var html = '<option value="-1">请选择</option>';
                 for (var i = 0; i < data.length; i++) {
-                    html = html + '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    html = html + '<option value="' + data[i].id + '">' + data[i].user + '</option>';
                 }
                 $("#dept").append(html);
             }

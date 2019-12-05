@@ -73,7 +73,7 @@ public class EmailUtil {
             message.setContent(multipart);
             //发送邮件
             Transport.send(message);
-           System.out.println("发送邮件成功！");
+//           System.out.println("发送邮件成功！");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,8 +18,8 @@
 
         <form action="/sys/user/list" method="get">
             账号：<input type="text" value="${account}" name="account">
-            开始时间：<input type="date" value="" name="ks">
-            结束时间：<input type="date" value="" name="js"><br>
+            开始时间：<input type="date" value="${ks}" name="ks">
+            结束时间：<input type="date" value="${js}" name="js"><br>
 
             <input type="submit" value="查询" class="btn btn-primary">
         </form>
@@ -78,10 +78,10 @@
             </tbody>
         </table>
 
-        <a href="/sys/user/list?account=${account}&page=1">首页</a>
-        <a href="/sys/user/list?account=${account}&page=${page.pageCurrent<=1 ? 1 : (page.pageCurrent-1)}">上一页</a>
-        <a href="/sys/user/list?account=${account}&page=${page.pageCurrent>=page.pageCount ? page.pageCount : (page.pageCurrent+1) }">下一页</a>
-        <a href="/sys/user/list?account=${account}&page=${page.pageCount}">末页</a>
+        <a href="/sys/user/list?account=${account}&ks=${ks}&js=${js}&page=1">首页</a>
+        <a href="/sys/user/list?account=${account}&ks=${ks}&js=${js}&page=${page.pageCurrent<=1 ? 1 : (page.pageCurrent-1)}">上一页</a>
+        <a href="/sys/user/list?account=${account}&ks=${ks}&js=${js}&page=${page.pageCurrent>=page.pageCount ? page.pageCount : (page.pageCurrent+1) }">下一页</a>
+        <a href="/sys/user/list?account=${account}&ks=${ks}&js=${js}&page=${page.pageCount}">末页</a>
         当前页：${page.pageCurrent},总页数：${page.pageCount}，总记录数：${page.count}
 
     </div>

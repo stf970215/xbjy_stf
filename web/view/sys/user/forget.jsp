@@ -10,7 +10,7 @@
     新密码：<input type="text" name="password" value=""><br><br>
     邮箱：<input type="text" id="email" value="">
     <input type="button" value="发送验证码" id="btn-send"/> <span id="time"></span><br><br>
-    验证码：<input type="text" name="code" value=""><br><br>
+    验证码：<input type="text" name="code" value=""><br><br><label>${cw}</label>
     <input type="submit" name="" value="修改">
 
 </form>

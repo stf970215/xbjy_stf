@@ -21,13 +21,7 @@ public class User {
      */
     private String  account;
 
-    public String getDeptName() {
-        return deptName;
-    }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
 
     private String deptName;
     private String password;
@@ -40,6 +34,13 @@ public class User {
     private String createBy;
     private Integer delFlag;
 
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
     public Integer getId() {
         return id;
     }

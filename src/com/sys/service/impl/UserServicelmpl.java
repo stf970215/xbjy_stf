@@ -18,14 +18,13 @@ import java.util.List;
 public class UserServicelmpl implements UserService {
     private UserDao userDao=new UserDao();
     //查询全部加条件
-    public List<User> listAll(String account, Page page){
+    public List<User> listAll(String account, Page page,String ks,String js){
 
-        return userDao.listAll(account,page);
+        return userDao.listAll(account,page,ks,js);
     }
 
-    public Integer getCount(String account){
-        System.out.println(userDao.getCount(account));
-        return userDao.getCount(account);
+    public Integer getCount(String account,String ks,String js){
+        return userDao.getCount(account,ks,js);
     }
     public void delId(Integer id){
         userDao.delID(id);
@@ -46,5 +45,9 @@ public class UserServicelmpl implements UserService {
 
     public void updatePassword(User user){
         userDao.updatePassword(user);
+    }
+
+    public List<User> checkLogin(User user){
+        return userDao.checkLogin(user);
     }
 }
